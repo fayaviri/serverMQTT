@@ -54,7 +54,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icono-balanza.ico</ApplicationIcon>
+    <ApplicationIcon>server-mqtt.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
@@ -175,6 +175,7 @@
     <None Include="Resources\chart_bar.png" />
     <None Include="Resources\legend.png" />
     <None Include="Resources\Proyecto nuevo.png" />
+    <Content Include="server-mqtt.ico" />
     <Content Include="setup.ico" />
     <None Include="Resources\card_gold.png" />
     <None Include="Resources\ReporteTotal.png" />

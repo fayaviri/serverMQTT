@@ -8,33 +8,46 @@ Public Class FormPrincipal
 
     Private Async Sub IniciarServidor()
         Try
+            BtnConectar.Enabled = False ' 🔒 Deshabilitar botón Conectar
+            BtnDesconectar.Enabled = False ' Por precaución
+
             Dim factory As New MqttFactory()
             mqttServer = factory.CreateMqttServer()
 
-            ' Configurar opciones del servidor
             Dim options = New MqttServerOptionsBuilder() _
-                .WithDefaultEndpoint() _
-                .WithDefaultEndpointPort(1883) _
-                .Build()
+            .WithDefaultEndpoint() _
+            .WithDefaultEndpointPort(1883) _
+            .Build()
 
-            ' Asignar manejador de mensajes recibidos
             mqttServer.UseApplicationMessageReceivedHandler(AddressOf ManejadorDeMensajes)
 
-            ' Iniciar el servidor
             Await mqttServer.StartAsync(options)
             AgregarALaConsola("✅ Servidor MQTT iniciado en puerto 1883.")
 
+            BtnDesconectar.Enabled = True ' 🔓 Habilitar botón Detener
         Catch ex As Exception
             AgregarALaConsola("❌ Error al iniciar el servidor MQTT: " & ex.Message)
+            BtnConectar.Enabled = True ' Volver a habilitar si falló
         End Try
     End Sub
 
     Private Async Sub DetenerServidor()
-        If mqttServer IsNot Nothing Then
-            Await mqttServer.StopAsync()
-            AgregarALaConsola("🛑 Servidor MQTT detenido.")
-        End If
+        Try
+            BtnDesconectar.Enabled = False ' 🔒 Deshabilitar botón Detener
+            BtnConectar.Enabled = False
+
+            If mqttServer IsNot Nothing Then
+                Await mqttServer.StopAsync()
+                AgregarALaConsola("🛑 Servidor MQTT detenido.")
+            End If
+
+            BtnConectar.Enabled = True ' 🔓 Habilitar botón Conectar
+        Catch ex As Exception
+            AgregarALaConsola("❌ Error al detener el servidor: " & ex.Message)
+            BtnDesconectar.Enabled = True ' Volver a habilitar si falló
+        End Try
     End Sub
+
 
     ' Manejador para los mensajes entrantes
     Private Sub ManejadorDeMensajes(e As MqttApplicationMessageReceivedEventArgs)
@@ -84,6 +97,9 @@ Public Class FormPrincipal
         ' Estilo botones
         ConfigurarBoton(BtnConectar, Color.ForestGreen)
         ConfigurarBoton(BtnDesconectar, Color.IndianRed)
+
+        Talertar.Enabled = True
+
     End Sub
 
     ' Aplicar estilo visual a los botones
@@ -98,4 +114,7 @@ Public Class FormPrincipal
         End With
     End Sub
 
+    Private Sub Talertar_Tick(sender As Object, e As EventArgs) Handles Talertar.Tick
+        txtConsola.Clear()
+    End Sub
 End Class

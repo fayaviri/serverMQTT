@@ -41,7 +41,7 @@ Partial Class FormPrincipal
         '
         'Talertar
         '
-        Me.Talertar.Interval = 4000
+        Me.Talertar.Interval = 5000
         '
         'BtnConectar
         '
@@ -77,7 +77,7 @@ Partial Class FormPrincipal
         Me.GroupBox1.Controls.Add(Me.BtnDesconectar)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(250, 137)
+        Me.GroupBox1.Size = New System.Drawing.Size(369, 137)
         Me.GroupBox1.TabIndex = 30
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Conectar"
@@ -91,10 +91,10 @@ Partial Class FormPrincipal
         Me.txtConsola.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtConsola.Location = New System.Drawing.Point(281, 0)
+        Me.txtConsola.Location = New System.Drawing.Point(12, 155)
         Me.txtConsola.Multiline = True
         Me.txtConsola.Name = "txtConsola"
-        Me.txtConsola.Size = New System.Drawing.Size(422, 449)
+        Me.txtConsola.Size = New System.Drawing.Size(369, 444)
         Me.txtConsola.TabIndex = 31
         '
         'FormPrincipal
@@ -102,7 +102,7 @@ Partial Class FormPrincipal
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(703, 450)
+        Me.ClientSize = New System.Drawing.Size(396, 611)
         Me.Controls.Add(Me.txtConsola)
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "FormPrincipal"
