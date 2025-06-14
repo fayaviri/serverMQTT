@@ -23,6 +23,7 @@ Partial Class FormPrincipal
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormPrincipal))
         Me.puertoserial = New System.IO.Ports.SerialPort(Me.components)
         Me.TLevantarConexion = New System.Windows.Forms.Timer(Me.components)
         Me.Talertar = New System.Windows.Forms.Timer(Me.components)
@@ -32,7 +33,11 @@ Partial Class FormPrincipal
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TBorrar = New System.Windows.Forms.Timer(Me.components)
         Me.txtConsola = New System.Windows.Forms.TextBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.SalirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TLevantarConexion
@@ -97,6 +102,25 @@ Partial Class FormPrincipal
         Me.txtConsola.Size = New System.Drawing.Size(369, 444)
         Me.txtConsola.TabIndex = 31
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SalirToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(97, 26)
+        '
+        'NotifyIcon1
+        '
+        Me.NotifyIcon1.ContextMenuStrip = Me.ContextMenuStrip1
+        Me.NotifyIcon1.Icon = CType(resources.GetObject("NotifyIcon1.Icon"), System.Drawing.Icon)
+        Me.NotifyIcon1.Text = "Server MQTT"
+        Me.NotifyIcon1.Visible = True
+        '
+        'SalirToolStripMenuItem
+        '
+        Me.SalirToolStripMenuItem.Name = "SalirToolStripMenuItem"
+        Me.SalirToolStripMenuItem.Size = New System.Drawing.Size(96, 22)
+        Me.SalirToolStripMenuItem.Text = "Salir"
+        '
         'FormPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -110,6 +134,7 @@ Partial Class FormPrincipal
         Me.Text = "Sistema Bascula Digital"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -123,4 +148,7 @@ Partial Class FormPrincipal
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents TBorrar As Timer
     Friend WithEvents txtConsola As TextBox
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents SalirToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents NotifyIcon1 As NotifyIcon
 End Class

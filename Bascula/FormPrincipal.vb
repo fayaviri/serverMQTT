@@ -2,9 +2,14 @@
 Imports MQTTnet
 Imports MQTTnet.Server
 
+
+
 Public Class FormPrincipal
 
     Private mqttServer As IMqttServer
+    ' Minimiazar 
+    Private contextMenu As New ContextMenuStrip()
+
 
     Private Async Sub IniciarServidor()
         Try
@@ -116,5 +121,36 @@ Public Class FormPrincipal
 
     Private Sub Talertar_Tick(sender As Object, e As EventArgs) Handles Talertar.Tick
         txtConsola.Clear()
+    End Sub
+
+    ' Minimiazar 
+    Private Sub SalirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SalirToolStripMenuItem.Click
+        NotifyIcon1.Visible = False
+        Application.Exit()
+    End Sub
+    ' Minimiazar 
+    Private Sub FormPrincipal_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
+        If Me.WindowState = FormWindowState.Minimized Then
+            Me.Hide()
+            NotifyIcon1.Visible = True
+            NotifyIcon1.BalloonTipTitle = "Servidor MQTT"
+            NotifyIcon1.BalloonTipText = "El servidor sigue en ejecución en segundo plano."
+            NotifyIcon1.ShowBalloonTip(1000)
+        End If
+    End Sub
+    ' Minimiazar 
+    Private Sub NotifyIcon1_DoubleClick(sender As Object, e As EventArgs) Handles NotifyIcon1.DoubleClick
+        Me.Show()
+        Me.WindowState = FormWindowState.Normal
+    End Sub
+    ' Minimiazar 
+    Private Sub FormPrincipal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If e.CloseReason = CloseReason.UserClosing Then
+            e.Cancel = True ' 🚫 Cancelar el cierre
+            Me.Hide()
+            NotifyIcon1.BalloonTipTitle = "Servidor MQTT"
+            NotifyIcon1.BalloonTipText = "Sigue ejecutándose en segundo plano. Click derecho -> Salir para cerrar."
+            NotifyIcon1.ShowBalloonTip(1000)
+        End If
     End Sub
 End Class
